@@ -9,7 +9,7 @@
     story begin.
   </p>
   <p>
-    <a class="btn btn-lg btn-success" href="#" role="button">Register</a>
+  <a class="btn btn-lg btn-success" href=" {{ route('signup') }}" role="button">Register</a>
   </p>
 </div>
 @endsection
