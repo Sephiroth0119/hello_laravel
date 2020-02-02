@@ -12,7 +12,7 @@ class UsersController extends Controller
     {
         //除了show create store 之外所有的功能都要对应id
         $this->middleware('auth', [
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store', 'index']
         ]);
 
         //授权策略 只允许游客访问注册
@@ -80,5 +80,13 @@ class UsersController extends Controller
         session()->flash('success', '个人资料更新成功!');
 
         return redirect()->route('users.show', $user);
+    }
+
+    public function destroy(User $user)
+    {
+        $this->authorize('destroy', $user);
+        $user->delete();
+        session()->flash('success', '成功删除用户!');
+        return back();
     }
 }
