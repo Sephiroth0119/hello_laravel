@@ -8,4 +8,12 @@
   <small>/ {{ $status->created_at->diffForHumans() }}</small></h5>
   {{ $status->content }}
   </div>
+
+  @can('destroy', $status)
+    <form action="{{ route('statuses.destroy',$status->id) }}" method="POST" onsubmit="return confirm('您确定要删除这条微博吗？');">
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+    <button type="submit" class="btn btn-danger">删除</button>
+    </form>
+  @endcan
 </li>
