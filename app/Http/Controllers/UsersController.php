@@ -35,7 +35,10 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        //取出用户所有的微博 并且按时间进行排序只显示三十条
+        $statuses = $user->statuses()->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('users.show', compact('user', 'statuses'));
     }
 
     public function store(Request $request)
